@@ -30,7 +30,7 @@ public class ModMenuTypes {
 
   public static final DeferredRegister<MenuType<?>> MENU_TYPES =
       DeferredRegister.create(Constants.MOD_ID, Registries.MENU);
-  public static final RegistrySupplier<MenuType<RewardCompactMenu>> REWARD_COMPACT_MENU =
+  protected ModMenuTypes() {}  public static final RegistrySupplier<MenuType<RewardCompactMenu>> REWARD_COMPACT_MENU =
       MENU_TYPES.register(
           "reward_compact_menu", () -> MenuRegistry.ofExtended(RewardCompactMenu::new));
   public static final RegistrySupplier<MenuType<RewardOverviewMenu>> REWARD_OVERVIEW_MENU =
@@ -42,5 +42,5 @@ public class ModMenuTypes {
               "reward_special_overview_menu",
               () -> MenuRegistry.ofExtended(RewardSpecialOverviewMenu::new));
 
-  protected ModMenuTypes() {}
+
 }

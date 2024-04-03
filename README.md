@@ -21,11 +21,13 @@ Daily rewards is a very lightweight and simple Forge mod that rewards players da
 
 Please report issues over the issue link above.
 
-## Credits for the 6.x Fabric port
+## 🔁 5.3.0 Fabric port
 
-Thanks a lot to [KaptainWutax](https://github.com/KaptainWutax) for converting the project to
-Architectury API to be able to provide a Fabric port.
-Please keep in mind that the 6.x Fabric version is currently in beta and might have some issues.
+Thanks a lot to [KaptainWutax](https://github.com/KaptainWutax) for converting the project
+to [Architectury][architectury] to be able to provide a Fabric port for 1.20.1.
+
+Please keep in mind that the 5.3.0 Fabric version is currently in beta for testing and might have
+limited features and possible bugs.
 
 ## License
 
@@ -38,3 +40,5 @@ Please check the wiki <https://github.com/MarkusBordihn/BOs-Daily-Rewards/wiki> 
 information.
 
 [logo]: https://github.com/MarkusBordihn/BOs-Daily-Rewards/wiki/logo_header.png
+
+[architectury]: https://docs.architectury.dev/start

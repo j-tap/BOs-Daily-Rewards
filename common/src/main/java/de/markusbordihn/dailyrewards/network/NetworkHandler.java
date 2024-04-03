@@ -28,12 +28,9 @@ import dev.architectury.platform.Platform;
 import dev.architectury.utils.Env;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.PacketListener;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -44,14 +41,19 @@ public class NetworkHandler {
   public static final NetworkChannel INSTANCE =
       NetworkChannel.create(new ResourceLocation(Constants.MOD_ID, "network"));
 
-  public static void registerNetworkHandler() {
-    log.info("{} Network Handler...", Constants.LOG_REGISTER_PREFIX);
+  protected NetworkHandler() {}
 
+  public static void registerNetworkHandler() {
     if (Platform.getEnvironment() == Env.CLIENT) {
-      Client.register();
-    } else {
-      Server.register();
+      return;
     }
+    log.info(
+        "{} Network Handler for {} ...", Constants.LOG_REGISTER_PREFIX, Platform.getEnvironment());
+
+    NetworkHandler.register(
+        MessageOpenRewardScreen.class,
+        MessageOpenRewardScreen::new,
+        context -> ((ServerPlayer) context.getPlayer()).connection);
   }
 
   public static <R extends PacketListener, T extends ModMessage<R>> void register(
@@ -71,47 +73,5 @@ public class NetworkHandler {
             packet.handle(contextMapper.apply(contextSupplier.get()));
           }
         });
-  }
-
-  public static <M> void sendToServer(M message) {
-    try {
-      INSTANCE.sendToServer(message);
-    } catch (Exception e) {
-      log.error("Failed to send {} to server, got error: {}", message, e.getMessage());
-    }
-  }
-
-  public static <M> void sendToPlayer(M message, ServerPlayer serverPlayer) {
-    try {
-      INSTANCE.sendToPlayer(serverPlayer, message);
-    } catch (Exception e) {
-      log.error(
-          "Failed to send {} to player {}, got error: {}",
-          message,
-          serverPlayer.getName().getString(),
-          e.getMessage());
-    }
-  }
-
-  public static class Client {
-    public static final Function<NetworkManager.PacketContext, ClientPacketListener> CLIENT_PLAY =
-        context -> Minecraft.getInstance().getConnection();
-    public static final Function<NetworkManager.PacketContext, ServerGamePacketListenerImpl>
-        SERVER_PLAY = context -> ((ServerPlayer) context.getPlayer()).connection;
-
-    public static void register() {
-      NetworkHandler.register(
-          MessageOpenRewardScreen.class, MessageOpenRewardScreen::new, SERVER_PLAY);
-    }
-  }
-
-  public static class Server {
-    public static final Function<NetworkManager.PacketContext, ServerGamePacketListenerImpl>
-        SERVER_PLAY = context -> ((ServerPlayer) context.getPlayer()).connection;
-
-    public static void register() {
-      NetworkHandler.register(
-          MessageOpenRewardScreen.class, MessageOpenRewardScreen::new, SERVER_PLAY);
-    }
   }
 }

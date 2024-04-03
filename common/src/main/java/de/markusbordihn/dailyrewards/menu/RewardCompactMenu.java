@@ -317,7 +317,7 @@ public class RewardCompactMenu extends RewardMenu {
                   specialSlotStartPositionX,
                   specialSlotStartPositionY));
         }
-        specialSlotStartPositionX += REWARD_SLOT_SIZE_X + REWARD_SLOT_SPACE_X;
+        specialSlotStartPositionX += (int) (REWARD_SLOT_SIZE_X + REWARD_SLOT_SPACE_X);
       }
     }
 

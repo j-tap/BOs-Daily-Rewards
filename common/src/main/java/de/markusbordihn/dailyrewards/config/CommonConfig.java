@@ -137,7 +137,7 @@ public class CommonConfig extends Config {
 
     this.rewardsAprilItems = List.of();
     this.rewardsAprilSpecialItems =
-        List.of("minecraft:eggs:1", "minecraft:cake:1", "minecraft:cookie:1");
+        List.of("minecraft:egg:1", "minecraft:cake:1", "minecraft:cookie:1");
     this.rewardsAprilSpecialUsers = List.of("");
 
     this.rewardsMayItems = List.of("minecraft:egg:16");

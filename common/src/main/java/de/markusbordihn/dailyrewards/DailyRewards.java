@@ -41,11 +41,10 @@ public class DailyRewards {
 
   protected static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
-  public DailyRewards() {
-  }
+  public DailyRewards() {}
 
   public static void init() {
-    // StopModReposts.checkStopModReposts();
+    StopModReposts.checkStopModReposts();
 
     log.info("Register Items ...");
     ModItems.ITEMS.register();

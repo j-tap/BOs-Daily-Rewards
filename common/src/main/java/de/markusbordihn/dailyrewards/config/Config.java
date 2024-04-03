@@ -14,13 +14,11 @@ import org.apache.logging.log4j.Logger;
 
 public abstract class Config {
 
-  private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-
-  private static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
-
-  protected transient String root =
+  protected static final String root =
       "config%s%s%s".formatted(File.separator, Constants.MOD_ID, File.separator);
-  protected transient String extension = ".json";
+  protected static final String extension = ".json";
+  private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+  private static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   public abstract String getPath();
 

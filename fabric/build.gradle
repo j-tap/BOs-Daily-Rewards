@@ -1,5 +1,8 @@
 plugins {
   id "com.github.johnrengelman.shadow" version "7.1.2"
+  id 'com.matthewprenger.cursegradle' version '1.4.0'
+  id 'nu.studer.credentials' version '3.0'
+  id "com.modrinth.minotaur" version "2.+"
 }
 
 architectury {
@@ -22,6 +25,9 @@ dependencies {
 
   common(project(path: ":common", configuration: "namedElements")) { transitive false }
   shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+
+  // Recommended Mods
+  modImplementation "curse.maven:tooltipfix-411557:4577194"
 }
 
 processResources {
@@ -69,4 +75,43 @@ publishing {
   repositories {
     // Add repositories to publish to here.
   }
+}
+
+curseforge {
+  apiKey = "${credentials.forKey('curseforge_api_token')}"
+  project {
+    id = "${project.curseforge_project_id}"
+    changelogType = 'markdown'
+    releaseType = "${project.curseforge_release_type}"
+    addGameVersion("${project.minecraft_version}")
+    addGameVersion("Fabric")
+    addGameVersion("Quilt")
+
+    mainArtifact(remapJar) {
+      relations {
+        requiredDependency 'fabric-api'
+        requiredDependency 'architectury-api'
+        optionalDependency 'tooltipfix'
+      }
+    }
+  }
+}
+
+modrinth {
+  token = "${credentials.forKey('modrinth_api_token')}"
+  projectId = "${project.modrinth_project_id}"
+  versionNumber = "${project.version}"
+  versionType = "${project.modrinth_release_type}"
+  versionName = "${project.mod_name} ${project.version}"
+  uploadFile = remapJar
+  gameVersions = ["${project.minecraft_version}"]
+  loaders = ["fabric", "quilt"]
+  dependencies {
+    required.project "fabric-api", "architectury-api"
+    optional.project "tooltipfix"
+  }
+}
+
+tasks.withType(JavaCompile).configureEach {
+  options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }

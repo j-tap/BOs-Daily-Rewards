@@ -5,7 +5,10 @@
   "name": "Daily Rewards",
   "description": "Daily rewards is a very lightweight and simple Forge mod that rewards players daily.",
   "authors": ["Markus Bordihn"],
-  "contact": {},
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/daily-rewards",
+    "issues": "https://github.com/MarkusBordihn/BOs-Daily-Rewards/issues"
+  },
   "license": "MIT",
   "icon": "logo.png",
   "environment": "*",
@@ -18,5 +21,8 @@
   "depends": {
     "fabricloader": ">=0.15.7",
     "minecraft": ">=1.20.1"
+  },
+  "suggests": {
+    "tooltipfix": "*"
   }
 }

@@ -76,6 +76,10 @@ public class CommonConfig extends Config {
   public List<String> rewardsDecemberSpecialItems;
   public List<String> rewardsDecemberSpecialUsers;
 
+  public RewardScreenType getRewardScreenType() {
+    return this.rewardScreenType != null ? this.rewardScreenType : RewardScreenType.COMPACT;
+  }
+
   @Override
   public String getPath() {
     return "common";

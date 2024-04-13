@@ -25,7 +25,6 @@ import de.markusbordihn.dailyrewards.network.message.ModMessage;
 import dev.architectury.networking.NetworkChannel;
 import dev.architectury.networking.NetworkManager;
 import dev.architectury.platform.Platform;
-import dev.architectury.utils.Env;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import net.minecraft.network.PacketListener;
@@ -44,9 +43,6 @@ public class NetworkHandler {
   protected NetworkHandler() {}
 
   public static void registerNetworkHandler() {
-    if (Platform.getEnvironment() == Env.CLIENT) {
-      return;
-    }
     log.info(
         "{} Network Handler for {} ...", Constants.LOG_REGISTER_PREFIX, Platform.getEnvironment());
 

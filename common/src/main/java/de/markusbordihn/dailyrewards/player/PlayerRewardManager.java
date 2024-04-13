@@ -142,7 +142,7 @@ public class PlayerRewardManager {
 
     // Open reward overview menu or show claim command, if player has any unclaimed rewards.
     if (hasUnclaimedRewards && Boolean.TRUE.equals(COMMON.showRewardMenuOnPlayerJoin)) {
-      switch (COMMON.rewardScreenType) {
+      switch (COMMON.getRewardScreenType()) {
         case COMPACT:
           RewardsScreen.openRewardCompactMenuForPlayer(player);
           break;

@@ -43,7 +43,7 @@ public class ClaimCommand extends CustomCommand {
     ServerPlayer player = context.getSource().getPlayerOrException();
 
     // Open reward screen for player depending on the configuration
-    switch (COMMON.rewardScreenType) {
+    switch (COMMON.getRewardScreenType()) {
       case DEFAULT_OVERVIEW -> RewardsScreen.openRewardOverviewMenuForPlayer(player);
       case COMPACT -> RewardsScreen.openRewardCompactMenuForPlayer(player);
       case SPECIAL_OVERVIEW -> RewardsScreen.openRewardSpecialOverviewMenuForPlayer(player);
